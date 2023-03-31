@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>3D rooms</title>
+</head>
+
+<body>
+<div style="width: 100vw; height: 100vh">
+  <canvas id="webgl" width="400" height="400">
+    Please use a browser that supports "canvas"
+  </canvas>
+</div>
+
+
+<script src="../lib/webgl-utils.js"></script>
+<script src="../lib/webgl-debug.js"></script>
+<script src="../lib/cuon-utils.js"></script>
+<script src="../lib/cuon-matrix.js"></script>
+<script type="module">
+  import { main } from './3D_rooms.js';
+  const canvas = document.getElementById('webgl');
+  // canvas.width = window.innerWidth;
+  // canvas.height = window.innerHeight;
+  main()
+</script>
+</body>
+</html>
