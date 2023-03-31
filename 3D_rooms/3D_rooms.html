@@ -7,7 +7,7 @@
 
 <body>
 <div style="width: 100vw; height: 100vh">
-  <canvas id="webgl" width="400" height="400">
+  <canvas id="webgl">
     Please use a browser that supports "canvas"
   </canvas>
 </div>
@@ -20,8 +20,8 @@
 <script type="module">
   import { main } from './3D_rooms.js';
   const canvas = document.getElementById('webgl');
-  // canvas.width = window.innerWidth;
-  // canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
   main()
 </script>
 </body>

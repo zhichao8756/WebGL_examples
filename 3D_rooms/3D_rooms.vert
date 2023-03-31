@@ -2,12 +2,10 @@
 // Vertex shader program
 
 attribute vec4 a_Position;
-attribute vec4 a_Color;
 // texture
 attribute vec2 a_TexCoord;
 
 uniform mat4 u_MvpMatrix;
-varying vec4 v_Color;
 varying vec2 v_TexCoord;
 void main() {
     gl_Position = u_MvpMatrix * a_Position;
