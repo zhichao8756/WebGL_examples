@@ -21,9 +21,11 @@ function start(gl, canvas) {
     console.log('Failed to intialize shaders.');
     return;
   }
+  gl.enable(gl.DEPTH_TEST);
   const n = initVertexBuffers(gl);
   gl.clearColor(0.0,0.0,0.0,1.0);
-  gl.enable(gl.DEPTH_TEST);
+  gl.clearDepth(1.0);
+
   // 初始化纹理
   initTextures(gl);
   const viewProjMatrix = new Matrix4();
@@ -73,12 +75,12 @@ function initVertexBuffers(gl) {
   ]);
   // texture coord
   const texCoords = new Float32Array([
-    0.125, 1.0,   0.0, 1.0,   0.0, 0.0,   0.125, 0.0,    // v0-v1-v2-v3 front
-    0.125, 1.0,   0.125, 0.0,   0.25, 0.0,   0.25, 0.25,    // v0-v3-v4-v5 right
-    0.375, 0.0,   0.375, 0.375,   0.25, 1.0,   0.25, 0.0,    // v0-v5-v6-v1 up
-    0.625, 0.625,   0.5, 1.0,   0.5, 0.0,   0.625, 0.0,    // v1-v6-v7-v2 left
-    0.375, 1.0,   0.5, 1.0,   0.5, 0.0,   0.375, 0.0,    // v7-v4-v3-v2 down
-    0.625, 0.0,   0,75, 0.0,   0.75, 1.0,   0.0, 1.0     // v4-v7-v6-v5 back
+    0.625, 1.0,   0.5, 1.0,   0.5, 0.0,   0.625, 0.0,    // v0-v1-v2-v3 front
+    0.0, 1.0,   0.0, 0.0,   0.125, 0.0,   0.125, 1.0,    // v0-v3-v4-v5 right
+    0.375, 0.0,   0.375, 1.0,   0.25, 1.0,   0.25, 0.0,    // v0-v5-v6-v1 up
+    0.25, 1.0,   0.125, 1.0,   0.125, 0.0,   0.25, 0.0,    // v1-v6-v7-v2 left
+    0.375, 0.0,   0.5, 0.0,  0.5, 1.0,   0.375, 1.0,       // v7-v4-v3-v2 down
+    0.625, 0.0,   0.75, 0.0,   0.75, 1.0,   0.625, 1.0     // v4-v7-v6-v5 back
   ]);
 /*  const texCoords = new Float32Array([   // Texture coordinates
     1.0, 1.0,   0.0, 1.0,   0.0, 0.0,   1.0, 0.0,    // v0-v1-v2-v3 front
@@ -126,6 +128,7 @@ function draw(gl, n, viewProjMatrix, u_MvpMatrix, currentAngle) {
   g_MvpMatrix.set(viewProjMatrix);
   g_MvpMatrix.rotate(currentAngle[0], 1.0, 0.0, 0.0); // Rotation around x-axis
   g_MvpMatrix.rotate(currentAngle[1], 0.0, 1.0, 0.0); // Rotation around y-axis
+  g_MvpMatrix.scale(1,1,-1);
   gl.uniformMatrix4fv(u_MvpMatrix, false, g_MvpMatrix.elements);
 
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);     // Clear buffers
